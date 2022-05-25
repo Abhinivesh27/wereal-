@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'package:wereal/home/body.dart';
 
 class VideoPage extends StatefulWidget {
   const VideoPage({Key? key}) : super(key: key);
@@ -29,6 +32,15 @@ class _VideoPageState extends State<VideoPage> {
     super.dispose();
   }
 
+  var title = [
+    "Home made video on flutter",
+    "Flutter tips and tricks",
+    "Appdev made easy 2022",
+    "Flutter dev made easy on this year"
+  ];
+  var channelName = "Flutter dev";
+  var channelIcon = Icons.person;
+  var videoDuration = ["27:00", "23:00", "10:00", "20:00"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,13 +62,36 @@ class _VideoPageState extends State<VideoPage> {
               ),
             ),
             Container(
+              padding: EdgeInsets.only(left: 20),
+              width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 8,
               color: Colors.blue,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Icon(Icons.thumb_up),
+                  Icon(Icons.thumb_down),
+                  Icon(Icons.share),
+                  Icon(Icons.download),
+                  Icon(Icons.save),
+                ],
+              ),
             ),
             Expanded(
               child: Container(
-                color: Colors.green,
-              ),
+                  child: ListView.builder(
+                itemCount: 3,
+                itemBuilder: (Context, index) {
+                  return VideoCard(
+                    thumbNail:
+                        "https://blog.codemagic.io/uploads/covers/Codemagic-io_Blog_Flutter-Versus-Other-Mobile-Development-Frameworks_1.png",
+                    title: title[index],
+                    channelIcon: Icons.person,
+                    channelName: "Nila",
+                    videoDuration: "2:30",
+                  );
+                },
+              )),
             )
           ],
         ),
